@@ -1,5 +1,7 @@
+using Loldle.Data;
 using Loldle.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Loldle.Controllers
@@ -12,6 +14,7 @@ namespace Loldle.Controllers
         {
             _logger = logger;
         }
+
 
         public IActionResult Index()
         {

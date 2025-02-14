@@ -19,29 +19,11 @@ namespace Loldle.Controllers
             _context = context;
         }
 
-
-
-
-
-        public async Task<Questions> GetRandomQuestion()
-        {
-            var count = await _context.Questions.CountAsync();
-            var index = new Random().Next(count);
-            return await _context.Questions.Skip(index).FirstOrDefaultAsync();
-        }
-
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-            var randomQuestion = await _context.Questions.OrderBy(r => Guid.NewGuid()).FirstOrDefaultAsync();
-            ViewBag.RandomQuestion = randomQuestion?.Question.FirstOrDefault();
-            return View();
+            return View(await _context.Questions.ToListAsync());
         }
-
-
-
-
-
 
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -72,7 +54,7 @@ namespace Loldle.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Questions questions)
+        public async Task<IActionResult> Create([Bind("Id,Question")] Questions questions)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +86,7 @@ namespace Loldle.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Questions questions)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Question")] Questions questions)
         {
             if (id != questions.Id)
             {
