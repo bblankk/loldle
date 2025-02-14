@@ -19,11 +19,29 @@ namespace Loldle.Controllers
             _context = context;
         }
 
+
+
+
+
+        public async Task<Questions> GetRandomQuestion()
+        {
+            var count = await _context.Questions.CountAsync();
+            var index = new Random().Next(count);
+            return await _context.Questions.Skip(index).FirstOrDefaultAsync();
+        }
+
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Questions.ToListAsync());
+            var randomQuestion = await _context.Questions.OrderBy(r => Guid.NewGuid()).FirstOrDefaultAsync();
+            ViewBag.RandomQuestion = randomQuestion?.Question.FirstOrDefault();
+            return View();
         }
+
+
+
+
+
 
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)

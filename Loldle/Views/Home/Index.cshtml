@@ -1,4 +1,7 @@
-﻿@{
+﻿x
+@model IEnumerable<Loldle.Models.Questions>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +9,53 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<div class="container">
+    <h2>Questions Form</h2>
+
+
+    <form method="post" action="/Home/SubmitForm">
+  
+
+        <div class="form-group">
+            <label for="question">Question:</label>
+            <textarea class="form-control" id="question" name="question" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</div>
+
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Display(model => model.Questions[0]);
+            </th>
+          
+        </tr>
+    </thead>
+   @*  <tbody>
+        @foreach (var item in model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
+               
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody> *@
+</table>
+
