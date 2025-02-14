@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loldle.Data;
-using test.Models;
+using Loldle.Models;
 
 namespace Loldle.Controllers
 {

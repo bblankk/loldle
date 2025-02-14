@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using test.Models;
+using Loldle.Models;
 
 namespace Loldle.Data
 {
@@ -10,8 +10,8 @@ namespace Loldle.Data
             : base(options)
         {
         }
-        public DbSet<test.Models.Champions> Champions { get; set; } = default!;
-        public DbSet<test.Models.Classic> Classic { get; set; } = default!;
-        public DbSet<test.Models.Questions> Questions { get; set; } = default!;
+        public DbSet<Loldle.Models.Champions> Champions { get; set; } = default!;
+        public DbSet<Loldle.Models.Info> Info { get; set; } = default!;
+        public DbSet<Loldle.Models.Questions> Questions { get; set; } = default!;
     }
 }

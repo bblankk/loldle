@@ -1,4 +1,4 @@
-﻿namespace test.Models
+﻿namespace Loldle.Models
 {
     public class Champions
     {
