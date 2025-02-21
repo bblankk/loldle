@@ -1,32 +1,45 @@
-using loldle.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using loldle.Models;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using loldle.Data;
 
 namespace loldle.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var randomQuote = _context.Quotes
+                .OrderBy(q => Guid.NewGuid())
+                .FirstOrDefault();
+            return View(randomQuote);
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult CheckAnswer(int id, string userAnswer)
         {
-            return View();
-        }
+            var quote = _context.Quotes.FirstOrDefault(q => q.Id == id);
+            if (quote != null && quote.Answer.Equals(userAnswer, StringComparison.OrdinalIgnoreCase))
+            {
+                ViewBag.Message = "Success!";
+            }
+            else
+            {
+                ViewBag.Message = "Try again!";
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var newRandomQuote = _context.Quotes
+                .OrderBy(q => Guid.NewGuid())
+                .FirstOrDefault();
+            return View("Index", newRandomQuote);
         }
     }
 }
