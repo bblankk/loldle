@@ -1,8 +1,18 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@model loldle.Models.Quote
+
+@{
+    ViewBag.Title = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>@Model.TextForQuestion</h2>
+
+<form asp-action="CheckAnswer" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <input type="text" name="userAnswer" placeholder="Your answer" required />
+    <button type="submit">Submit</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}
