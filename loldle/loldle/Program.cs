@@ -38,6 +38,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Quotes}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "classic",
+    pattern: "{controller=ClassicMode}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();

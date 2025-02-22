@@ -1,0 +1,39 @@
+@model loldle.Models.Champion
+
+@{
+    ViewData["Title"] = "Classic Mode";
+}
+
+<h1>Guess the Champion</h1>
+
+<p>
+    Region: @Model.Region <br />
+    Type: @Model.Type <br />
+    Gender: @Model.Gender <br />
+    Race: @Model.Race <br />
+    Positions: @Model.Positions <br />
+    Resource: @Model.Resource <br />
+    Range Type: @Model.RangeType
+</p>
+
+<form asp-action="CheckAnswer" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="form-group">
+        <label for="userAnswer">Your Guess:</label>
+        <input type="text" class="form-control" id="userAnswer" name="userAnswer" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<p>@ViewBag.Message</p>
+
+@if (ViewBag.WrongAnswers != null && ((List<string>)ViewBag.WrongAnswers).Count > 0)
+{
+        <h3>Wrong Answers</h3>
+        <ul>
+        @foreach (var answer in (List<string>)ViewBag.WrongAnswers)
+        {
+                    <li>@answer</li>
+        }
+        </ul>
+}
