@@ -1,22 +1,198 @@
-html {
-  font-size: 14px;
+/* Dark Minimalistic Theme with Gold Accents */
+
+:root {
+    --background-black: #0a0a0a;
+    --gold-accent: #D4AF37;
+    --atlantic-depths: #12355B; /* darkened deep blue */
+    --stellar-explorer: #1D5A6A; /* muted teal */
+    --carnaby-tan: #7A5C3B; /* muted brown */
+    --text-light: #e0dfe1;
+    --text-muted: #a0a0a0;
+    --table-row-hover: #3d2f11; /* dark goldish */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Base styles */
 body {
-  margin-bottom: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-black);
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Container */
+.container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #121212;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: var(--gold-accent);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 7px rgba(212, 175, 55, 0.8);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+/* Paragraph */
+p {
+    color: var(--text-light);
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+}
+
+/* Links */
+a {
+    color: var(--gold-accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+    a:hover, a:focus {
+        color: #fff176; /* lighter gold */
+        text-decoration: underline;
+        outline: none;
+    }
+
+/* Buttons */
+.button, button, input[type="submit"], input[type="button"] {
+    background-color: var(--gold-accent);
+    color: var(--background-black);
+    border: none;
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+    .button:hover, button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+        background-color: #fff176;
+        color: var(--background-black);
+        box-shadow: 0 6px 20px rgba(255, 241, 118, 0.8);
+    }
+
+/* Navbar */
+.navbar {
+    background-color: var(--background-black);
+    padding: 1rem 2rem;
+    color: var(--gold-accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--gold-accent);
+}
+
+    .navbar a {
+        color: var(--gold-accent);
+        margin-left: 1rem;
+        font-weight: 600;
+        text-shadow: 0 0 5px rgba(212, 175, 55, 0.7);
+    }
+
+        .navbar a:hover {
+            color: #fff176;
+        }
+
+/* Form inputs */
+input[type="text"], input[type="email"], textarea, select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1.5px solid var(--carnaby-tan);
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #222;
+    color: var(--text-light);
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+    textarea::placeholder {
+        color: var(--text-muted);
+    }
+
+    input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: var(--gold-accent);
+        box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+        background-color: #2a2a2a;
+    }
+
+/* Footer */
+.footer {
+    background-color: #121212;
+    color: var(--gold-accent);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    border-top: 2px solid var(--gold-accent);
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.8);
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 1rem;
+}
+
+/* Table like MVC style but dark */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--carnaby-tan);
+    text-align: left;
+    background-color: #1b1b1b;
+}
+
+th {
+    background-color: var(--gold-accent);
+    color: var(--background-black);
+    font-weight: 700;
+    text-shadow: none;
+}
+
+tr:nth-child(even) {
+    background-color: #222;
+}
+
+tr:hover {
+    background-color: var(--table-row-hover);
+    color: var(--gold-accent);
+    transition: background-color 0.3s ease;
 }
