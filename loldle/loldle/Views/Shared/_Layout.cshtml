@@ -4,26 +4,73 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - loldle</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Modern, slim version of Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/loldle.styles.css" asp-append-version="true" />
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Animate.css for smooth animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        .table {
+            color: var(--gold-primary, #FFD700); /* fallback to gold */
+            background-color: #000000; /* pure black */
+            border: 1px solid #FFD700; /* gold border */
+        }
+
+            .table th {
+                background-color: #000000; /* black header */
+                border: 1px solid #FFD700; /* gold border */
+                color: #FFD700; /* gold text */
+            }
+
+            .table td {
+                border: 1px solid rgba(255, 215, 0, 0.3); /* subtle gold border */
+                color: #FFD700; /* gold text */
+                background-color: #000000; /* black cells */
+            }
+
+            .a {
+                color: gold;
+            }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(255, 215, 0, 0.15); /* gold highlight on hover */
+            color: #000000; /* black text on hover for contrast */
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">loldle</a>
+                <a class="navbar-brand animate-hover" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-dragon me-2" style="color: var(--gold-primary);"></i>loldle
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <div class="navbar-collapse collapse d-md-inline-flex justify-content-between">
+                    <ul class="navbar-nav">
+                        <!-- Dropdown Menu -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle animate-hover" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bars me-1"></i>Menu
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark animate-dropdown" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="ClassicMode" asp-action="Index"><i class="fas fa-paint-brush me-2"></i>Classic Mode</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Quotes" asp-action="Index"><i class="fas fa-quote-right me-2"></i>Quotes</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Champions" asp-action="Index"><i class="fas fa-info-circle me-2"></i>Champions</a></li>
+                            </ul>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -31,20 +78,51 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <div class="container mt-5 pt-4">
+        <main role="main" class="pb-3 animate__animated animate__fadeIn">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - loldle - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Modern JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    
     <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script>
+        // Add smooth animations to navigation items
+        $(document).ready(function() {
+            $('.nav-link').hover(
+                function() {
+                    $(this)
+
+
+
+ddClass('animate__animated animate__pulse');
+                },
+                function() {
+                    $(this).removeClass('animate__animated animate__pulse');
+                }
+            );
+            
+            // Add animation to page transitions
+            $('a').not('.dropdown-item').on('click', function(e) {
+                if (this.href.indexOf('#') === -1 && !$(this).hasClass('no-transition')) {
+                    e.preventDefault();
+                    $('main').addClass('animate__animated animate__fadeOut');
+                    setTimeout(function() {
+                        window.location.href = e.target.href;
+                    }, 500);
+                }
+            });
+        });
+    </script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

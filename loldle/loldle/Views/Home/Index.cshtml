@@ -4,15 +4,23 @@
     ViewBag.Title = "Home";
 }
 
-<h2>@Model.TextForQuestion</h2>
+<h2 style="text-align: center;">@Model.TextForQuestion</h2>
 
-<form asp-action="CheckAnswer" method="post">
+<form asp-action="CheckAnswer" method="post" style="text-align: center; margin-top: 20px;">
     <input type="hidden" name="id" value="@Model.Id" />
-    <input type="text" name="userAnswer" placeholder="Your answer" required />
-    <button type="submit">Submit</button>
+    <input type="text"
+           name="userAnswer"
+           placeholder="Your answer"
+           required
+           style="padding: 10px; border: 2px solid gold; border-radius: 5px; background-color: black; color: gold; width: 300px; font-size: 16px; margin-bottom: 10px;" />
+    <br />
+    <button type="submit"
+            style="padding: 10px 20px; border: none; border-radius: 5px; background-color: gold; color: black; font-size: 16px; cursor: pointer; font-weight: bold;">
+        Submit
+    </button>
 </form>
 
 @if (ViewBag.Message != null)
 {
-    <p>@ViewBag.Message</p>
+    <p style="color: gold; font-size: 18px; text-align: center;">@ViewBag.Message</p>
 }
